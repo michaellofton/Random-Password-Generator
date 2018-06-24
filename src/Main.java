@@ -1,9 +1,22 @@
+/* Program Description:
+* @author Michael Lofton
+* @version 1.0.0
+*
+* This program allows any user to generate a random password up to
+* 1024 characters long, using one or all of the following character sets:
+* lowercase, uppercase, special characters, and numbers. The user can also
+* copy the password, or save the password to a file with information
+* detailing when it was generated.
+*
+* The user is given control for how large they want their password to be, and
+* what they want their password to contain.
+*
+* The save feature is used when people decide to use the generated password
+* for some website or account and forgot what their password was because they
+* didn't write it down.
+*/
 import javafx.application.Application;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 public class Main extends Application
@@ -14,29 +27,21 @@ public class Main extends Application
         launch(args);
     }
 
-    /*
-    The visual layout (the view, a fxml file) is loaded using the fxml loader.
-    The title for the program is given as a string
-    The window is then created using the loaded view (fxml file)
-    The windows is then set to be visible and displayable for the user.
-     */
     @Override
-    public void start(Stage primaryStage) throws Exception
+    public void start(Stage window) throws Exception
     {
-
-        passwordGenerator passwordGenModel = new passwordGenerator();
+        int sceneWidth = 340;
+        int sceneHeight = 360;
         View guiView = new View(); //Extends Parent to make it workable with scene objects
 
+        passwordGenerator passwordGenModel = new passwordGenerator();
+
         Controller controller = new Controller(passwordGenModel, guiView);
+        window.setScene(new Scene(guiView, sceneWidth, sceneHeight));
 
-        primaryStage.setScene(new Scene(guiView, 340, 360));
-
-        //Parent root = FXMLLoader.load(getClass().getResource("view.fxml"));
-        primaryStage.setTitle("Random Password Generator");
-        //primaryStage.setScene(new Scene(root, 450, 340));
-        primaryStage.show();
-		
-
+        window.setTitle("Random Password Generator");
+        window.setResizable(false);
+        window.show();
 
     }
 

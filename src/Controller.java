@@ -1,50 +1,53 @@
+/*
+ The controller is used to hookup the functionality of the program with the user interface so
+ that the program responds to the user's interactions with it. This class implements
+ an EventHandler which allows it to call the necessary functions under certain interactive
+ situations (i.e. the user clicks a button to make a password, it calls a function to make the password).
+ The controller also has access to both the view and the model, which are passed as parameters to its constructor.
+ */
+
 import javafx.event.EventHandler;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-//import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.stage.*;
-import javafx.stage.Window;
+import javafx.stage.FileChooser;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.io.*;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.io.FileWriter;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Arrays;
-import java.util.Date;
 
 
-/*
- The controller is used to hookup the functionality of the program with the user interface so
- that the program responds to the user's interactions with it.
-
- */
 public class Controller implements EventHandler<ActionEvent>
 {
     private View guiView;
     private passwordGenerator passGenModel;
     private Label messageLabel;
-
     private int maxPassLength = 1024;
 
-    String savePassMenuItemStr;
-    String maxLengthMenuItemStr;
-    String textFieldStr;
-    String makePassButtonStr;
-    String copyButtonStr;
-
     public Controller(passwordGenerator givenPassGenModel, View givenView)
+    /*------------------------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-13-2018
+	*
+	* Takes in a model and a view as parameters and binds them to private
+	* variables so the controller can use them in the future. The function
+	* also sets the action event for each widget of the view that
+	* requires an event to happen after it's been interacted with.
+	*/
     {
         guiView = givenView;
         passGenModel = givenPassGenModel;
@@ -65,8 +68,6 @@ public class Controller implements EventHandler<ActionEvent>
                 });
 
         guiView.getSavePassMenuItem().setOnAction(this);
-        guiView.getMaxLengthMenuItem().setOnAction(this);
-
     }
 
     /* Need to create a handle(ActionEvent name) function when
@@ -75,18 +76,18 @@ public class Controller implements EventHandler<ActionEvent>
     public void handle(ActionEvent event)
     /*-----------------------------------------------------------------
     * Author(s): 	Michael Lofton
-    * Date:			xx-xx-2018
+    * Date:			4-07-2018
     *
-    * checks to see which button or widget was clicked on. Performs the
-    * necessary actions when a certain button was clicked on. Allows easy
-    * modifiability if the GUI needs to use more or fewer buttons.
+    * Checks to see which button or widget was clicked on. Calls an appropriate
+    * function to perform the necessary actions when certain event happens.
+    * Allows easy modifiability if the GUI needs to use more or widgets that
+    * create events.
     */
     {
+        String eventString = event.toString();
         String savePassMenuItemStr = guiView.getSavePassMenuItem().toString();
-        String maxLengthMenuItemStr = guiView.getMaxLengthMenuItem().toString();
         String makePassButtonStr = guiView.getMakePasswordButton().getText();
         String copyButtonStr = guiView.getCopyButton().getText();
-        String eventString = event.toString();
 
         if (eventString.contains(makePassButtonStr))
         {
@@ -100,24 +101,24 @@ public class Controller implements EventHandler<ActionEvent>
         {
             handleSavePassMenuItem();
         }
-        else if (eventString.contains(maxLengthMenuItemStr))
-        {
-            handleMaxLengthMenuItem();
-        }
     }
-
-
-    /*******************************************************************
-    Takes in a button as a parameter, and
-     */
-
+    //*******************************************************************
 
     public void handleMakePasswordButton()
     {
+    /*-----------------------------------------------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-10-2018
+	*
+	* If no checkbox was selected, throw a null pointer exception and changes the
+	* label so the user knows. Otherwise, add the selected checkbox's characters to
+	* the set of possible characters for a password, obtain the password length from
+	 * the user's selected choice, and make the password.
+	*/
         //Handle the "make password" button
 
         /* Storing in object to prevent making another set of calls to get the object
-        when using calling setCharacterSet method */
+        when using calling setCharacterSet method in the passwordGenerator model*/
         RadioButton NumOfCharRadioButton = guiView.getNumOfCharRadioButton();
         RadioButton moreCharRadioButton = guiView.getMoreCharRadioButton();
 
@@ -130,7 +131,7 @@ public class Controller implements EventHandler<ActionEvent>
         {
             messageLabel.setText("");
             if (!lowercaseCheckBox.isSelected() && !uppercaseCheckBox.isSelected()
-                    && !specialCheckBox.isSelected() && !numberCheckBox.isSelected())
+                && !specialCheckBox.isSelected() && !numberCheckBox.isSelected())
             {
                 throw new NullPointerException("No checkboxes were selected");
             }
@@ -180,7 +181,7 @@ public class Controller implements EventHandler<ActionEvent>
     public void copyToClipboard(String textToCopy, ClipboardOwner user)
     /*-----------------------------------------------------------------
 	* Author(s): 	Michael Lofton
-	* Date:			xx-xx-2018
+	* Date:			4-07-2018
 	*
 	* When calling this function, we can set clipboardOwner parameter to null,
     * and by default it will use the local machine's clipboard.
@@ -200,11 +201,12 @@ public class Controller implements EventHandler<ActionEvent>
     public void handleCopyButton()
     /*-----------------------------
 	* Author(s): 	Michael Lofton
-	* Date:			xx-xx-2018
+	* Date:			4-07-2018
 	*
 	* Copies the password to the user's
 	* clipboard when they press the copy
-	* button
+	* button, but only if they already
+	* generated a password.
 	*/
     {
         String textToCopy = guiView.getPasswordTextArea().getText();
@@ -217,18 +219,17 @@ public class Controller implements EventHandler<ActionEvent>
             copyToClipboard(textToCopy, null);
             messageLabel.setText("Password Copied!");
         }
-
     }
 
     public void handleMoreCharTextFieldClick()
-    /*-----------------------------
+    /*------------------------------------
 	* Author(s): 	Michael Lofton
-	* Date:			xx-xx-2018
+	* Date:			4-8-2018
 	*
 	* Makes the radio button above the textfield
 	* be selected when the user clicks on the
-	* textfield. Clicking on the textfield is the same
-	* as selecting the radio button)
+	* textfield (Clicking on the textfield is the same
+	* as selecting the radio button).
 	*/
     {
         guiView.getMoreCharRadioButton().setSelected(true);
@@ -236,29 +237,37 @@ public class Controller implements EventHandler<ActionEvent>
 
 
     public void handlePassLengthChoiceBoxClick()
-    /*-----------------------------
+    /*----------------------------------------
 	* Author(s): 	Michael Lofton
-	* Date:			xx-xx-2018
+	* Date:			4-8-2018
 	*
 	* Makes the radio button above the choicebox
 	* be selected when the user clicks on the
-	* choicebox. Clicking on the choicebox is the same
-	* as selecting the radio button)
+	* choicebox (Clicking on the choicebox is the same
+	* as selecting the radio button).
 	*/
     {
         guiView.getNumOfCharRadioButton().setSelected(true);
     }
-
+    //*******************************************************************
 
 
     public String getCurrentWorkingDirectory()
     {
-        System.out.println("Getting current working directory");
+        //System.out.println("Getting current working directory");
         return System.getProperty("user.dir");
     }
 
     //Call this only if the file is brand new
     public String createHeader()
+    /*--------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-11-2018
+	*
+	* Creates a header string showing the first line
+	* to be written to the file of passwords if the file
+	* hasn't been made yet.
+	*/
     {
         String header = "Randomly Generated Passwords:" +
                         System.lineSeparator() +
@@ -267,6 +276,14 @@ public class Controller implements EventHandler<ActionEvent>
     }
 
     public String createDetails(String password)
+    /*------------------------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-11-2018
+	*
+	* Creates details for the generated password including
+	* the time it was created, the day, the month, the year,
+	* and the timezone. Returns a string with this information
+	*/
     {
         //Format the date according to a specific desire:
         //https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ofLocalizedDateTime-java.time.format.FormatStyle-
@@ -279,17 +296,18 @@ public class Controller implements EventHandler<ActionEvent>
         String date = timeCreated.getMonth() + "/" + timeCreated.getDayOfMonth() + "/" + timeCreated.getYear();
         String time = timeCreated.format(dateFormat);//timeCreated.getHour() + ":" + timeCreated.getMinute() + timeCreated.format(dateFormat);
         String zone = "Time Zone: " + timeCreated.getZone().toString();
-        String passFormatted = "Password " + password;
+        String passFormatted = "Password: " + password;
 
         int longest = Integer.max(
                 Integer.max(date.length(), time.length()),
                 Integer.max(zone.length(), passFormatted.length()));
 
-        /*Attribution: Credit to umidjons from GitHub for this technique:
+        /* START_Attribution: Credit to umidjons from GitHub for this technique:
         https://gist.github.com/umidjons/10859940
         */
         char borderChar = '=';
         String border = new String(new char[longest]).replace('\0', borderChar);
+        /* END_Attribution */
 
         return date + System.lineSeparator()
                 + time + System.lineSeparator()
@@ -301,11 +319,17 @@ public class Controller implements EventHandler<ActionEvent>
 
 
     public void writePassToFile(String password, File selectedFile)
+    /*--------------------------------------------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-13-2018
+	*
+	* If the given file exists, the function will append the details of
+	* the given password to the file. If the file doesn't exist, it will
+	* create a new file and write the header, then append the details of
+	* the given password. If an error happens, the function changes the
+	* message label to let the user know.
+	*/
     {
-
-        System.out.println("Writing " + password + " to " + selectedFile);
-        System.out.println(createHeader() + createDetails(password));
-
         try
         {
             if (selectedFile.exists())
@@ -327,7 +351,6 @@ public class Controller implements EventHandler<ActionEvent>
                 outputBuffer.close();
                 messageLabel.setText("Saving to file was successful");
             }
-
         }
         catch (FileNotFoundException fileNotFoundEx)
         {
@@ -337,24 +360,6 @@ public class Controller implements EventHandler<ActionEvent>
         {
             messageLabel.setText("Error saving to file: " + selectedFile.toString());
         }
-
-
-
-        //http://www.baeldung.com/java-write-to-file
-
-        /*
-        if file doesnt exist,
-            make a new file, write header on first line;
-        else if file already exists
-            push all data down by one space
-            append header/data to top of file
-            */
-
-        //FileWriter is a custom class used to call simple methods that write data to files
-        //When creating the custom class, use template for kind of data to write in files
-        //I.E. writing strings, binary data,
-
-        //FileWriter passFileWriter = new FileWriter();
     }
 
     public FileChooser.ExtensionFilter getFileExtensions()
@@ -366,35 +371,39 @@ public class Controller implements EventHandler<ActionEvent>
     }
 
     public void handleSavePassMenuItem()
+    /*------------------------------------------
+	* Author(s): 	Michael Lofton
+	* Date:			4-29-2018
+	*
+	* If no password has been generated, then the user is given a message
+	* telling them they should first generate a message before they try to save
+	* it. If they already generated a password, the function gets the current
+	* working directory, allows the user to choose where to save their file,
+	* and then writes the password to the specified location.
+	*/
     {
-        System.out.println("Handling Saving password");
-
-        String currentWorkingDirectory = getCurrentWorkingDirectory();
-        System.out.println("CWD: " + currentWorkingDirectory);
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose where to save the password");
-        fileChooser.setInitialDirectory(new File(currentWorkingDirectory));
-        fileChooser.setInitialFileName("Random Passwords Generated");
-        fileChooser.getExtensionFilters().add(getFileExtensions());
-
-        //Shows the actual file chooser dialog window
-        File selectedFile = fileChooser.showSaveDialog(null);
-        System.out.println("Selected file is: " + selectedFile);
-
         String password = guiView.getPasswordTextArea().getText();
 
-        //If the user chose a file they want to save to, save password to it.
-        writePassToFile(password, selectedFile);
+        if (password.equals(""))
+        {
+            messageLabel.setText("You need to make a password before you can save it.");
+        }
+        else
+        {
+            String currentWorkingDirectory = getCurrentWorkingDirectory();
 
-        //2nd param = path (string) or file
-        //writePassToFile(pass, path);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose where to save the password");
+            fileChooser.setInitialDirectory(new File(currentWorkingDirectory));
+            fileChooser.setInitialFileName("Random Passwords Generated");
+            fileChooser.getExtensionFilters().add(getFileExtensions());
 
+            //Shows the actual file chooser dialog window
+            File selectedFile = fileChooser.showSaveDialog(null);
+            System.out.println("Selected file is: " + selectedFile);
+
+            //If the user chose a file they want to save to, save password to it.
+            writePassToFile(password, selectedFile);
+        }
     }
-
-    public void handleMaxLengthMenuItem()
-    {
-        System.out.println("Handling changing the max length of pass");
-    }
-
 }
