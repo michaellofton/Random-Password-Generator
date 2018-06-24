@@ -403,7 +403,10 @@ public class Controller implements EventHandler<ActionEvent>
             System.out.println("Selected file is: " + selectedFile);
 
             //If the user chose a file they want to save to, save password to it.
-            writePassToFile(password, selectedFile);
+            if (selectedFile != null)
+            {
+                writePassToFile(password, selectedFile);
+            }
         }
     }
 }
