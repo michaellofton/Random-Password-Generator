@@ -48,8 +48,8 @@ public class passwordGenerator
                                 boolean special, boolean numbs)
                                 throws NullPointerException
     {
-    /*---------------------------------------
-	* Author(s): 	Michael Lofton, Other Name, Third Name, etc
+    /*----------------------------------------------------------
+	* Author(s): Michael Lofton, Other Name, Third Name, etc
 	* Date: 12-23-17
 	*
 	* By using 4 given booleans representing which checkboxes were selected,

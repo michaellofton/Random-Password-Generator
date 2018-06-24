@@ -39,15 +39,15 @@ public class Controller implements EventHandler<ActionEvent>
     private int maxPassLength = 1024;
 
     public Controller(passwordGenerator givenPassGenModel, View givenView)
-    /*------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-13-2018
-	*
-	* Takes in a model and a view as parameters and binds them to private
-	* variables so the controller can use them in the future. The function
-	* also sets the action event for each widget of the view that
-	* requires an event to happen after it's been interacted with.
-	*/
+    /*-------------------------------------------------------------------
+    * Author(s):    Michael Lofton
+    * Date:         4-13-2018
+    *
+    * Takes in a model and a view as parameters and binds them to private
+    * variables so the controller can use them in the future. The function
+    * also sets the action event for each widget of the view that
+    * requires an event to happen after it's been interacted with.
+    */
     {
         guiView = givenView;
         passGenModel = givenPassGenModel;
@@ -75,8 +75,8 @@ public class Controller implements EventHandler<ActionEvent>
      */
     public void handle(ActionEvent event)
     /*-----------------------------------------------------------------
-    * Author(s): 	Michael Lofton
-    * Date:			4-07-2018
+    * Author(s):    Michael Lofton
+    * Date:         4-07-2018
     *
     * Checks to see which button or widget was clicked on. Calls an appropriate
     * function to perform the necessary actions when certain event happens.
@@ -105,18 +105,16 @@ public class Controller implements EventHandler<ActionEvent>
     //*******************************************************************
 
     public void handleMakePasswordButton()
-    {
     /*-----------------------------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-10-2018
-	*
-	* If no checkbox was selected, throw a null pointer exception and changes the
-	* label so the user knows. Otherwise, add the selected checkbox's characters to
-	* the set of possible characters for a password, obtain the password length from
-	 * the user's selected choice, and make the password.
-	*/
-        //Handle the "make password" button
-
+    * Author(s):    Michael Lofton
+    * Date:         4-10-2018
+    *
+    * If no checkbox was selected, throw a null pointer exception and changes the
+    * label so the user knows. Otherwise, add the selected checkbox's characters to
+    * the set of possible characters for a password, obtain the password length from
+    * the user's selected choice, and make the password.
+    */
+    {
         /* Storing in object to prevent making another set of calls to get the object
         when using calling setCharacterSet method in the passwordGenerator model*/
         RadioButton NumOfCharRadioButton = guiView.getNumOfCharRadioButton();
@@ -164,8 +162,7 @@ public class Controller implements EventHandler<ActionEvent>
 
             String password = passGenModel.makePassword(passLength);
             guiView.getPasswordTextArea().setText(password);
-
-            }
+        }
         catch(NullPointerException nullException)
         {
             messageLabel.setText("ERROR: Please select at least 1 checkbox");
@@ -180,12 +177,12 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void copyToClipboard(String textToCopy, ClipboardOwner user)
     /*-----------------------------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-07-2018
-	*
-	* When calling this function, we can set clipboardOwner parameter to null,
+    * Author(s):    Michael Lofton
+    * Date:         4-07-2018
+    *
+    * When calling this function, we can set clipboardOwner parameter to null,
     * and by default it will use the local machine's clipboard.
-	*/
+    */
     {
         //Create & get the clipboard from the computer
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -200,14 +197,14 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void handleCopyButton()
     /*-----------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-07-2018
-	*
-	* Copies the password to the user's
-	* clipboard when they press the copy
-	* button, but only if they already
-	* generated a password.
-	*/
+    *Author(s):    Michael Lofton
+    * Date:         4-07-2018
+    *
+    * Copies the password to the user's
+    * clipboard when they press the copy
+    * button, but only if they already
+    * generated a password.
+    */
     {
         String textToCopy = guiView.getPasswordTextArea().getText();
         if (textToCopy.equals(""))
@@ -223,14 +220,14 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void handleMoreCharTextFieldClick()
     /*------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-8-2018
-	*
-	* Makes the radio button above the textfield
-	* be selected when the user clicks on the
-	* textfield (Clicking on the textfield is the same
-	* as selecting the radio button).
-	*/
+    * Author(s):    Michael Lofton
+    * Date:         4-8-2018
+    *
+    * Makes the radio button above the textfield
+    * be selected when the user clicks on the
+    * textfield (Clicking on the textfield is the same
+    * as selecting the radio button).
+    */
     {
         guiView.getMoreCharRadioButton().setSelected(true);
     }
@@ -238,13 +235,13 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void handlePassLengthChoiceBoxClick()
     /*----------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-8-2018
-	*
-	* Makes the radio button above the choicebox
-	* be selected when the user clicks on the
-	* choicebox (Clicking on the choicebox is the same
-	* as selecting the radio button).
+    * Author(s):    Michael Lofton
+    * Date:         4-8-2018
+    *
+    * Makes the radio button above the choicebox
+    * be selected when the user clicks on the
+    * choicebox (Clicking on the choicebox is the same
+    * as selecting the radio button).
 	*/
     {
         guiView.getNumOfCharRadioButton().setSelected(true);
@@ -261,13 +258,13 @@ public class Controller implements EventHandler<ActionEvent>
     //Call this only if the file is brand new
     public String createHeader()
     /*--------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-11-2018
-	*
-	* Creates a header string showing the first line
-	* to be written to the file of passwords if the file
-	* hasn't been made yet.
-	*/
+    * Author(s):    Michael Lofton
+    * Date:         4-11-2018
+    *
+    * Creates a header string showing the first line
+    * to be written to the file of passwords if the file
+    * hasn't been made yet.
+    */
     {
         String header = "Randomly Generated Passwords:" +
                         System.lineSeparator() +
@@ -277,13 +274,13 @@ public class Controller implements EventHandler<ActionEvent>
 
     public String createDetails(String password)
     /*------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-11-2018
-	*
-	* Creates details for the generated password including
-	* the time it was created, the day, the month, the year,
-	* and the timezone. Returns a string with this information
-	*/
+    * Author(s):    Michael Lofton
+    * Date:         4-11-2018
+    *
+    * Creates details for the generated password including
+    * the time it was created, the day, the month, the year,
+    * and the timezone. Returns a string with this information
+    */
     {
         //Format the date according to a specific desire:
         //https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html#ofLocalizedDateTime-java.time.format.FormatStyle-
@@ -320,15 +317,15 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void writePassToFile(String password, File selectedFile)
     /*--------------------------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-13-2018
-	*
-	* If the given file exists, the function will append the details of
-	* the given password to the file. If the file doesn't exist, it will
-	* create a new file and write the header, then append the details of
-	* the given password. If an error happens, the function changes the
-	* message label to let the user know.
-	*/
+    * Author(s):    Michael Lofton
+    * Date:         4-13-2018
+    *
+    * If the given file exists, the function will append the details of
+    * the given password to the file. If the file doesn't exist, it will
+    * create a new file and write the header, then append the details of
+    * the given password. If an error happens, the function changes the
+    * message label to let the user know.
+    */
     {
         try
         {
@@ -372,15 +369,15 @@ public class Controller implements EventHandler<ActionEvent>
 
     public void handleSavePassMenuItem()
     /*------------------------------------------
-	* Author(s): 	Michael Lofton
-	* Date:			4-29-2018
-	*
-	* If no password has been generated, then the user is given a message
-	* telling them they should first generate a message before they try to save
-	* it. If they already generated a password, the function gets the current
-	* working directory, allows the user to choose where to save their file,
-	* and then writes the password to the specified location.
-	*/
+    * Author(s):    Michael Lofton
+    * Date:         4-29-2018
+    *
+    * If no password has been generated, then the user is given a message
+    * telling them they should first generate a message before they try to save
+    * it. If they already generated a password, the function gets the current
+    * working directory, allows the user to choose where to save their file,
+    * and then writes the password to the specified location.
+    */
     {
         String password = guiView.getPasswordTextArea().getText();
 
