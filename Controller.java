@@ -242,7 +242,7 @@ public class Controller implements EventHandler<ActionEvent>
     * be selected when the user clicks on the
     * choicebox (Clicking on the choicebox is the same
     * as selecting the radio button).
-	*/
+    */
     {
         guiView.getNumOfCharRadioButton().setSelected(true);
     }

@@ -8,7 +8,7 @@
 * copy the password, or save the password to a file with information
 * detailing when it was generated.
 *
-* The user is given control for how large they want their password to be, and
+* The user is given control over how large they want their password to be, and
 * what they want their password to contain.
 *
 * The save feature is used when people decide to use the generated password
@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application
 {
-
     public static void main(String[] args)
     {
         launch(args);
@@ -44,7 +43,4 @@ public class Main extends Application
         window.show();
 
     }
-
-
-
 }

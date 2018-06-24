@@ -49,13 +49,13 @@ public class passwordGenerator
                                 throws NullPointerException
     {
     /*----------------------------------------------------------
-	* Author(s): Michael Lofton, Other Name, Third Name, etc
-	* Date: 12-23-17
-	*
-	* By using 4 given booleans representing which checkboxes were selected,
-	* this function determines which character set to use when
-	* randomly generating the password.
-	*/
+    * Author(s): Michael Lofton, Other Name, Third Name, etc
+    * Date: 12-23-17
+    *
+    * By using 4 given booleans representing which checkboxes were selected,
+    * this function determines which character set to use when
+    * randomly generating the password.
+    */
         if (lower && !characterSet.contains(lowAlpha))
         {
             characterSet.add(lowAlpha);
@@ -101,13 +101,13 @@ public class passwordGenerator
     
     public String makePassword(int size)
     /*---------------------------------------
-	* Author(s): 	Michael Lofton, Other Name, Third Name, etc
-	* Date: 12-23-17
-	*
-	* Randomly chooses a character set (string array), and then randomly chooses
-	* a character from that character set to append to the password. This
-	* process is done a number of (passwordLength) times.
-	*/
+    * Author(s): 	Michael Lofton, Other Name, Third Name, etc
+    * Date: 12-23-17
+    *
+    * Randomly chooses a character set (string array), and then randomly chooses
+    * a character from that character set to append to the password. This
+    * process is done a number of (passwordLength) times.
+    */
     {
         passwordLength = size;
         String password = "";
