@@ -101,7 +101,8 @@ public class View extends Parent
 		numOfCharRadioButton.setSelected(true);
 
 		//Give the ChoiceBox an observable list
-        ObservableList<Integer> passwordLengths = FXCollections.observableArrayList(8,9,10,11,12,13,14,15);
+        ObservableList<Integer> passwordLengths =
+				FXCollections.observableArrayList(8,9,10,11,12,13,14,15);
         passLengthChoiceBox = new ChoiceBox<>(passwordLengths);
 		passLengthChoiceBox.setValue(8);
 
