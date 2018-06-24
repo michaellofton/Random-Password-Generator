@@ -281,10 +281,10 @@ public class View extends Parent
     }
 
 
-/*--------------------------------------
-G E T T E R Functions
-Allow the controller to get the data from the view
----------------------------------------*/
+    /*--------------------------------------
+    G E T T E R Functions
+    Allow the controller to get the data from the view
+    ---------------------------------------*/
     public TextArea getPasswordTextArea()
     {
         return passwordTextArea;
@@ -439,7 +439,6 @@ Allow the controller to get the data from the view
     {
         debug = value;
     }
-
 
     public void showChildren()
     {
