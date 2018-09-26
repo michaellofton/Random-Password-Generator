@@ -3,16 +3,16 @@ This program is a simple desktop application designed to help people easily gene
 
 ## Features:
 - Portable (works on any machine that has the Java Runtime Environment (JRE) installed).
-Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+  - Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 - Save Passwords to a specified location on hard disk or removable disk.
 - Generate passwords up to 1024 characters long.
 - Change the type of characters used in the password.
 
 ## Uses:      
-      Possible applications and usage for this program include:
-      - Creating a strong password for account registration. 
-      - Statistically analyzing the distribution of the randomly chosen characters.
-      - Other applications involving the need for random string generation.
+Possible applications and usage for this program include:
+- Creating a strong password for account registration. 
+- Statistically analyzing the distribution of the randomly chosen characters.
+- Other applications involving the need for random string generation.
 
 ## Design Features
 The majority of the functionality of the program was written in Java while parts of the graphical user interface and event handling were made using JavaFX. 
