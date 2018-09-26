@@ -1,22 +1,20 @@
 # Random-Password-Generator
-
-# About
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
-# Features:
-      * Portable (works on any machine that has the Java Runtime Environment (JRE) installed).
-          * Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
-      * Save Passwords to a specified location on hard disk or removable disk.
-      * Generate passwords up to 1024 characters long.
-      * Change the type of characters used in the password.
+## Features:
+      - Portable (works on any machine that has the Java Runtime Environment (JRE) installed).
+          ---> Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+      - Save Passwords to a specified location on hard disk or removable disk.
+      - Generate passwords up to 1024 characters long.
+      - Change the type of characters used in the password.
 
-# Uses:
+## Uses:
       Possible applications and usage for this program include:
-      * Creating a strong password for account registration. 
-      * Statistically analyzing the distribution of the randomly chosen characters.
-      * Other applications involving the need for random string generation.
+      - Creating a strong password for account registration. 
+      - Statistically analyzing the distribution of the randomly chosen characters.
+      - Other applications involving the need for random string generation.
 
-# Design Features
+## Design Features
 The majority of the functionality of the program was written in Java while parts of the graphical user interface and event handling were made using JavaFX. 
 
 The program was created using the Model-view-controller design pattern, which creates a communication of data from the model (the part that generates the password), the view (what the user sees) and the controller (the part that updates the view using information from the model). 
