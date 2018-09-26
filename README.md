@@ -8,8 +8,8 @@ This program is a simple desktop application designed to help people easily gene
       - Generate passwords up to 1024 characters long.
       - Change the type of characters used in the password.
 
-## Uses:
-      Possible applications and usage for this program include:
+## Uses:      
+Possible applications and usage for this program include:
       - Creating a strong password for account registration. 
       - Statistically analyzing the distribution of the randomly chosen characters.
       - Other applications involving the need for random string generation.
