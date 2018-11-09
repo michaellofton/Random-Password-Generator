@@ -2,7 +2,7 @@
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
 ## Features:
-- Portable (works on any machine that has the Java Runtime Environment (JRE) installed).
+- Portable (works on any machine that has Java (AKA the Java Runtime Environment (JRE)) installed).
   - Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 - Save Passwords to a specified location on hard disk or removable disk.
 - Generate passwords up to 1024 characters long.
