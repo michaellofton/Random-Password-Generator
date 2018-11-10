@@ -6,7 +6,7 @@ This program is a simple desktop application designed to help people easily gene
   - Download here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 - Save Passwords to a specified location on hard disk or removable disk.
 - Generate passwords up to 1024 characters long.
-- Change the type of characters used in the password.
+- Change the type of characters used in the password (lowercase, uppercase, special, and numbers).
 
 ## Uses:      
 Possible applications and usage for this program include:
