@@ -1,7 +1,7 @@
 # Random Password Generator
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
-<img src="/img/make-pass.png" style="text-align: center">
+<img src="/img/make-pass.png" style="text-align: center"/>
 
 ## Features:
 - Portable (works on desktop and laptop machines that have Java (AKA the Java Runtime Environment (JRE)) installed).
