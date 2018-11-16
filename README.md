@@ -1,8 +1,10 @@
 # Random Password Generator
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
-(https://github.com/michaellofton/Random-Password-Generator/tree/master/img/content.png)
-<img src="/img/content.png" alt="Image"/>
+<img src="/img/content.png"/>
+<img src="/img/make pass.png"/>
+<img src="/img/save pass 3.png"/>
+
 
 ## Features:
 - Portable (works on desktop and laptop machines that have Java (AKA the Java Runtime Environment (JRE)) installed).
