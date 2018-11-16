@@ -3,10 +3,6 @@ This program is a simple desktop application designed to help people easily gene
 
 <img src="/img/content.png" style="text-align: center">
 
-<img src="/img/save-pass-to-file.png" style="text-align: center">
-<img src="/img/length.png" style="text-align: center">
-<img src="/img/make-pass.png" style="text-align: center">
-
 
 ## Features:
 - Portable (works on desktop and laptop machines that have Java (AKA the Java Runtime Environment (JRE)) installed).
