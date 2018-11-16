@@ -4,7 +4,8 @@ This program is a simple desktop application designed to help people easily gene
 <img src="/img/content.png" style="text-align: center">
 
 <img src="/img/save-pass-to-file.png" style="text-align: center">
-<img src="/img/length.png" style="text-align: left"/><img src="/img/make-pass.png" style="text-align: right"/>
+<img src="/img/length.png" style="text-align: center">
+<img src="/img/make-pass.png" style="text-align: center">
 
 
 ## Features:
