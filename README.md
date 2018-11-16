@@ -1,12 +1,13 @@
 # Random Password Generator
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
-<img src="/img/length.png" style="text-align: left"/>        <img src="/img/make-pass.png" style="text-align: right"/>
 <img src="/img/save-pass-to-file.png" style="text-align: center">
+<img src="/img/length.png" style="text-align: left"/><img src="/img/make-pass.png" style="text-align: right"/>
+
 
 ## Features:
 - Portable (works on desktop and laptop machines that have Java (AKA the Java Runtime Environment (JRE)) installed).
-  - Download Java here:  https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
+  - Download Java here: https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html
 - Save Passwords to a specified location on hard disk or removable disk.
 - Generate passwords up to 1024 characters long.
 - Change the type of characters used in the password (lowercase, uppercase, special, and numbers).
