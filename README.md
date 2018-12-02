@@ -23,6 +23,6 @@ The program was created using the Model-view-controller design pattern, which cr
 
 Modularity was incorporated by allowing each module (java class file) to be modified individually and to remain separated from the other modules. This affects the program's changeability, allowing it to be adaptable to any necessary changes in the future. 
 
-The program also uses a label to inform the user if any bad input was detected, and changes the label to help the user know which type of input to provide depending on the error.
+Error handling measures were used to prevent the program from crashing upon invalid user input. Depending on the type of error, the program uses a label widget to inform the user if any bad input was detected. Once bad input is detected, the program changes the text of the label to help the user know which type of input to provide to resolve the error.
 
 The mechanism that makes this program "random" is the SecureRandom class from the java.security package. The class uses a cryptographically secure pseudo random number generating (PRNG) algorithm to generate a random number. This random number is then transformed into an index to choose a character.
