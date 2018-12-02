@@ -1,4 +1,4 @@
-# Random Password Generator
+# Random Password Generator (Version 1.0.0)
 This program is a simple desktop application designed to help people easily generate, copy, and save random strings that can be used as passwords.
 
 <img src="/img/diagram.png" style="text-align:center"/>
